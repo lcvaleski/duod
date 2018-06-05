@@ -1,0 +1,29 @@
+{% extends "bootstrap/base.html" %}
+
+{% block content %}
+<center><h1><a style="text-decoration: none; color: inherit;" href="/">Will the DJIA close up or down tomorrow?</a></h1></center>
+{% endblock %}
+
+{% block container %}
+<table style="width:100%">
+  <tr>
+    <td width="50%">
+      <button
+        style="border-radius:10px 0 0 10px;"
+        class="btn btn-success btn-lg btn-block">Up
+      </button>
+    </td>
+    <td width="50%">
+      <button
+        style="border-radius:0 10px 10px 0;"
+        class="btn btn-danger btn-lg btn-block">Down
+      </button>
+  </td>
+  </tr>
+</table>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+{% endblock %}
