@@ -1,24 +1,26 @@
 {% extends "bootstrap/base.html" %}
 
-{% block content %}
+{% block title %}DUOD{% endblock %}
+
+{% block navbar %}
 <center><h1><a style="text-decoration: none; color: inherit;" href="/">Will the DJIA close up or down tomorrow?</a></h1></center>
 {% endblock %}
 
-{% block container %}
+{% block content %}
 <table style="width:100%">
   <tr>
     <td width="50%">
-      <button
+      <a href="/poll/up"
         style="border-radius:10px 0 0 10px;"
         class="btn btn-success btn-lg btn-block">Up
-      </button>
+      </a>
     </td>
     <td width="50%">
-      <button
+      <a href="/poll/down"
         style="border-radius:0 10px 10px 0;"
         class="btn btn-danger btn-lg btn-block">Down
-      </button>
-  </td>
+      </a>
+    </td>
   </tr>
 </table>
 {% endblock %}

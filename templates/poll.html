@@ -1,6 +1,6 @@
 {% extends "home.html" %}
 
-{% block container %}
+{% block content %}
 <table style="width:100%">
   <tr>
     <td width="{{ percent_up }}%">
@@ -14,7 +14,7 @@
         style="border-radius:0 10px 10px 0; opacity:{% if vote == 'up'%}0.5{% else %}1{% endif %};"
         class="btn btn-danger btn-lg btn-block">Down ({{ 100 - percent_up }}%, total)
       </button>
-  </td>
+    </td>
   </tr>
 </table>
 {% endblock %}
