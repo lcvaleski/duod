@@ -1,0 +1,22 @@
+{% extends "poll.html" %}
+
+{% block content %}
+<div class="alert alert-danger" role="alert">
+  The market is open, so the voting window is closed. Come back at market close to vote!
+</div>
+<table style="width:100%">
+    <tr>
+      <td width="{{ percent_up }}%">
+        <button
+          style="border-radius:10px 0 0 10px; opacity:{% if vote == 'down'%}0.5{% else %}1{% endif %};"
+          class="btn btn-success btn-lg btn-block">Up ({{ percent_up }}%)
+        </button>
+      </td>
+      <td width="{{ 100 - percent_up }}">
+        <button
+          style="border-radius:0 10px 10px 0; opacity:{% if vote == 'up'%}0.5{% else %}1{% endif %};"
+          class="btn btn-danger btn-lg btn-block">Down({{ 100 - percent_up }}%)
+        </button>
+      </td>
+    </tr>
+</table>
