@@ -110,7 +110,7 @@ def handle_vote(vote):
             return response
         else: # user has not voted, but the window is closed
             percent_up = int((Votes.query.filter_by(vote='up').count() / Votes.query.count()) * 100)
-            return 'The market is closed.'
+            return render_template("poll_market_open.html", percent_up=percent_up)
 
     else: # if the user has voted, then display the poll html without adding to db
         percent_up = int((Votes.query.filter_by(vote='up').count() / Votes.query.count()) * 100)
