@@ -45,10 +45,17 @@ def home():
 
     return render_template ('home.html') # if the above if does not run, render home
 
+def weekday(day):
+    if day.weekday < 5:
+       return False
+    return True
+
+
 def market_closed(cur_time):
-    if ((cur_time.hour == 14 and cur_time.minute >= 30)
-        or
-       (cur_time.hour > 14 and cur_time.hour < 21)):
+    if (cur_time.weekday() < 5 and
+                ((cur_time.hour == 14 and cur_time.minute >= 30)
+                or
+                (cur_time.hour > 14 and cur_time.hour < 21))):
        return False
     return True
 
@@ -62,6 +69,7 @@ def test_market_closed():
     open_time_1 = datetime.strptime("12/06/18 14:35", "%d/%m/%y %H:%M")
     closed_time_2 = datetime.strptime("12/06/18 23:05", "%d/%m/%y %H:%M")
     open_time_2 = datetime.strptime("12/06/18 18:00", "%d/%m/%y %H:%M")
+    closed_weekend = datetime.strptime("17/06/18 18:00", "%d/%m/%y %H:%M")
 
     if not market_closed(closed_time_1):
         tests_passed = False
@@ -79,27 +87,20 @@ def test_market_closed():
         tests_passed = False
         print err_message + "open_time_2"
 
-    # TODO test some weekend days
+    if not market_closed(closed_weekend):
+        tests_passed = False
+        print err_message + "closed_weekend"
 
     if tests_passed:
         print "market_closed() works! all tests_passed"
 
     return
 
-
-def market_closed(cur_time):
-    if ((cur_time.hour == 14 and cur_time.minute >= 30)
-        or
-       (cur_time.hour > 14 and cur_time.hour < 21)):
-       return False
-    return True
-
-
 @app.route('/poll/<vote>') # VOTE
 def handle_vote(vote):
 
     if not 'vote' in request.cookies: # if the user has not voted, add their vote
-        if market_closed(datetime.utcnow()): # market is closed
+        if market_closed(datetime.utcnow()) and weekday(): # market is closed and its a weekday
             v = Votes(vote)
             db.session.add(v)
             db.session.commit()
