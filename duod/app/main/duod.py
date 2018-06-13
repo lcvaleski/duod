@@ -35,21 +35,8 @@ class Votes(db.Model):
 ################################################################################################################################################################
 ################################################################################################################################################################
 
-@app.route('/') # HOME
-def home():
-
-    if 'vote' in request.cookies: #if the user has voted, return poll html
-        percent_up = int((Votes.query.filter_by(vote='up').count() / Votes.query.count()) * 100)
-        response = make_response( render_template('poll.html', percent_up=percent_up, vote=request.cookies.get('vote')))
-        return response
-
-    return render_template ('home.html') # if the above if does not run, render home
-
-def weekday(day):
-    if day.weekday < 5:
-       return False
-    return True
-
+def percent_up():
+    return int((Votes.query.filter_by(vote='up').count() / Votes.query.count()) * 100)
 
 def market_closed(cur_time):
     if (cur_time.weekday() < 5 and
@@ -96,25 +83,31 @@ def test_market_closed():
 
     return
 
+@app.route('/') # HOME
+def home():
+    if 'vote' in request.cookies: #if the user has voted, return poll html
+        response = make_response( render_template('poll.html', percent_up=percent_up(), vote=request.cookies.get('vote')))
+        return response
+
+    return render_template ('home.html') # if the above if does not run, render home
+
+
 @app.route('/poll/<vote>') # VOTE
 def handle_vote(vote):
 
     if not 'vote' in request.cookies: # if the user has not voted, add their vote
-        if market_closed(datetime.utcnow()) and weekday(): # market is closed and its a weekday
+        if market_closed(datetime.utcnow()): # market is closed and its a weekday
             v = Votes(vote)
             db.session.add(v)
             db.session.commit()
-            percent_up = int((Votes.query.filter_by(vote='up').count() / Votes.query.count()) * 100)
-            response = make_response( render_template('poll.html', percent_up=percent_up, vote=vote))
+            response = make_response( render_template('poll.html', percent_up=percent_up(), vote=vote))
 
             response.set_cookie('vote', vote)
             return response
         else: # user has not voted, but the window is closed
-            percent_up = int((Votes.query.filter_by(vote='up').count() / Votes.query.count()) * 100)
-            return render_template("poll_market_open.html", percent_up=percent_up)
+            return render_template("poll_market_open.html", percent_up=percent_up())
 
     else: # if the user has voted, then display the poll html without adding to db
-        percent_up = int((Votes.query.filter_by(vote='up').count() / Votes.query.count()) * 100)
         response = make_response( render_template('poll.html', percent_up=percent_up, vote=vote))
         return response
 
