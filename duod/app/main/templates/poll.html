@@ -6,13 +6,13 @@
       <td width="{{ percent_up }}%">
         <button
           style="border-radius:10px 0 0 10px; opacity:{% if vote == 'down'%}0.5{% else %}1{% endif %};"
-          class="btn btn-success btn-lg btn-block">{% if vote == 'up'%}You voted: Up ({{ percent_up }}%){% else %}Up ({{ percent_up }}%){% endif %}
+          class="btn btn-success btn-lg btn-block">Up ({{ percent_up }}%)
         </button>
       </td>
       <td width="{{ 100 - percent_up }}">
         <button
           style="border-radius:0 10px 10px 0; opacity:{% if vote == 'up'%}0.5{% else %}1{% endif %};"
-          class="btn btn-danger btn-lg btn-block">{% if vote == 'down'%}You voted: Down({{ 100 - percent_up }}%){% else %}Down ({{ 100 - percent_up }}%){% endif %}
+          class="btn btn-danger btn-lg btn-block">Down ({{ 100 - percent_up }}%)
         </button>
       </td>
     </tr>

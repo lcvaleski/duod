@@ -89,7 +89,7 @@ def home():
         response = make_response( render_template('poll.html', percent_up=percent_up(), vote=request.cookies.get('vote')))
         return response
 
-    return render_template ('home.html') # if the above if does not run, render home
+    return render_template ('home.html', market_closed=market_closed(datetime.utcnow()), percent_up=percent_up()) # if the above if does not run, render home
 
 
 @app.route('/poll/<vote>') # VOTE
@@ -101,11 +101,10 @@ def handle_vote(vote):
             db.session.add(v)
             db.session.commit()
             response = make_response( render_template('poll.html', percent_up=percent_up(), vote=vote))
-
             response.set_cookie('vote', vote)
             return response
         else: # user has not voted, but the window is closed
-            return render_template("poll_market_open.html", percent_up=percent_up())
+            return render_template("home.html", percent_up=percent_up())
 
     else: # if the user has voted, then display the poll html without adding to db
         response = make_response( render_template('poll.html', percent_up=percent_up, vote=vote))

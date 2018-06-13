@@ -7,22 +7,42 @@
 {% endblock %}
 
 {% block content %}
-<table style="width:100%">
-  <tr>
-    <td width="50%">
-      <a href="/poll/up"
-        style="border-radius:10px 0 0 10px;"
-        class="btn btn-success btn-lg btn-block">Up
-      </a>
-    </td>
-    <td width="50%">
-      <a href="/poll/down"
-        style="border-radius:0 10px 10px 0;"
-        class="btn btn-danger btn-lg btn-block">Down
-      </a>
-    </td>
-  </tr>
-</table>
+{% if market_closed %} <!-- Voting window is open and user can click the button links !-->
+  <table style="width:100%">
+    <tr>
+      <td width="50%">
+        <a href="/poll/up"
+          style="border-radius:10px 0 0 10px;"
+          class="btn btn-success btn-lg btn-block">Up
+        </a>
+      </td>
+      <td width="50%">
+        <a href="/poll/down"
+          style="border-radius:0 10px 10px 0;"
+          class="btn btn-danger btn-lg btn-block">Down
+        </a>
+      </td>
+    </tr>
+  </table>
+{% else %} <!-- Voting window is closed and page just displays poll results !-->
+  <table style="width:100%">
+      <tr>
+        <td width="{{ percent_up }}%">
+          <button
+            style="border-radius:10px 0 0 10px;"
+            class="btn btn-success btn-lg btn-block">Up ({{ percent_up }}%)
+          </button>
+        </td>
+        <td width="{{ 100 - percent_up }}">
+          <button
+            style="border-radius:0 10px 10px 0;"
+            class="btn btn-danger btn-lg btn-block">Down ({{ 100 - percent_up }}%)
+          </button>
+        </td>
+      </tr>
+  </table>
+  <p><b>The voting window is closed, come back at market close to cast your vote for tomorrow!</b></p>
+{% endif %}
 {% endblock %}
 
 {% block scripts %}
