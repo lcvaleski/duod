@@ -30,13 +30,13 @@
         <td width="{{ percent_up }}%">
           <button
             style="border-radius:10px 0 0 10px;"
-            class="btn btn-success btn-lg btn-block">Up ({{ percent_up }}%)
+            class="btn btn-success btn-lg btn-block">Up ({{ percent_up }}%) {{ vote_count_up }} total.
           </button>
         </td>
         <td width="{{ 100 - percent_up }}">
           <button
             style="border-radius:0 10px 10px 0;"
-            class="btn btn-danger btn-lg btn-block">Down ({{ 100 - percent_up }}%)
+            class="btn btn-danger btn-lg btn-block">Down ({{ 100 - percent_up }}%) {{ vote_count_down }} total.
           </button>
         </td>
       </tr>
