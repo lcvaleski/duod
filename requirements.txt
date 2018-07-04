@@ -10,6 +10,7 @@ Flask-Moment==0.6.0
 Flask-SQLAlchemy==2.3.2
 Flask-WTF==0.14.2
 futures==3.2.0
+gunicorn==19.9.0
 itsdangerous==0.24
 Jinja2==2.10
 macholib==1.5.1
