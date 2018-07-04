@@ -36,7 +36,9 @@ class Votes(db.Model):
 ################################################################################################################################################################
 
 def percent_up():
-    return int((Votes.query.filter_by(vote='up').count() / Votes.query.count()) * 100)
+    if Votes.query.count():
+        return int((Votes.query.filter_by(vote='up').count() / Votes.query.count()) * 100)
+    return 0
 
 def vote_count(vote_type):
     return int(Votes.query.filter_by(vote=vote_type).count())
