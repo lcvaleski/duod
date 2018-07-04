@@ -63,23 +63,23 @@ def test_market_closed():
 
     if not market_closed(closed_time_1):
         tests_passed = False
-        print err_message + "closed_time_1"
+        print (err_message + "closed_time_1")
 
     if market_closed(open_time_1):
         tests_passed = False
-        print err_message + "open_time_1"
+        print (err_message + "open_time_1")
 
     if not market_closed(closed_time_2):
         tests_passed = False
-        print err_message + "closed_time_2"
+        print (err_message + "closed_time_2")
 
     if market_closed(open_time_2):
         tests_passed = False
-        print err_message + "open_time_2"
+        print (err_message + "open_time_2")
 
     if not market_closed(closed_weekend):
         tests_passed = False
-        print err_message + "closed_weekend"
+        print (err_message + "closed_weekend")
 
     if tests_passed:
         print "market_closed() works! all tests_passed"
