@@ -1,4 +1,3 @@
 *.DS_Store
 env/
-data.sqlite
 duod.pyc
