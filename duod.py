@@ -4,6 +4,8 @@ from datetime import datetime
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import Column, Integer, String
 from flask_bootstrap import Bootstrap
+from flask_script import Manager
+from flask_migrate import Migrate, MigrateCommand
 import os
 
 ################################################################################################################################################################
@@ -17,6 +19,10 @@ app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 bootstrap = Bootstrap(app)
 db = SQLAlchemy(app)
+migrate = Migrate(app, db)
+
+manager = Manager(app)
+manager.add_command('db', MigrateCommand)
 
 ################################################################################################################################################################
 ################################################################################################################################################################
@@ -128,4 +134,4 @@ def handle_vote(vote):
 ################################################################################################################################################################
 
 if __name__ == "__main__":
-    app.run()
+    manager.run()
