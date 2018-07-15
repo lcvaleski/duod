@@ -15,7 +15,7 @@ class Votes(db.Model):
 class Historical(db.Model):
     __tablename__ = 'historical'
     id = Column(Integer, primary_key=True)
-    date = Column(DateTime)
+    date = Column(String)
     value = Column(String)
 
     def __repr__(self):
