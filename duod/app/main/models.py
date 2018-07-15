@@ -11,3 +11,12 @@ class Votes(db.Model):
 
     def __repr__(self):
         return '<Vote %s>' % (self.vote)
+
+class Historical(db.Model):
+    __tablename__ = 'historical'
+    id = Column(Integer, primary_key=True)
+    date = Column(DateTime)
+    value = Column(String)
+
+    def __repr__(self):
+        return '<Vote %s>' % (self.value)
