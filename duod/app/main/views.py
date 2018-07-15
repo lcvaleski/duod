@@ -1,6 +1,7 @@
 from __future__ import division
 from flask import Flask, render_template, make_response, request
 from datetime import datetime
+from app import db
 from . import main
 from models import Votes
 
