@@ -14,15 +14,15 @@ class TestTimeFunctions(unittest.TestCase):
         open_time_2 = datetime.strptime("12/06/18 18:00", "%d/%m/%y %H:%M")
         closed_weekend = datetime.strptime("17/06/18 18:00", "%d/%m/%y %H:%M")
 
-        self.assertFalse(market_closed(closed_time_1))
+        self.assertTrue(market_closed(closed_time_1))
 
-        self.assertTrue(market_closed(open_time_1))
+        self.assertFalse(market_closed(open_time_1))
 
-        self.assertFalse(market_closed(closed_time_2))
+        self.assertTrue(market_closed(closed_time_2))
 
-        self.assertTrue(market_closed(open_time_2))
+        self.assertFalse(market_closed(open_time_2))
 
-        self.assertFalse(market_closed(closed_weekend))
+        self.assertTrue(market_closed(closed_weekend))
 
 if __name__ == '__main__':
     unittest.main()
