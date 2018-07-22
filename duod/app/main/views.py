@@ -34,6 +34,7 @@ def home():
     return render_template ('home.html', market_closed=market_closed(datetime.utcnow()), percent_up=p_up,
         vote_count_up=vote_count_up, vote_count_down=vote_count_down) # if the above if does not run, render home
 
+# delete me
 
 @main.route('/poll/<vote>') # VOTE
 def handle_vote(vote):
