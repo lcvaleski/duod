@@ -1,8 +1,7 @@
-import os
 from datetime import datetime
 import unittest
 
-from util_funcs import market_closed
+from app.main.views import market_closed
 
 class TestTimeFunctions(unittest.TestCase):
 
